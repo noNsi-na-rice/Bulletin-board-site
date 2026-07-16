@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>うみパト - シチズンサイエンス・ゴミ拾い掲示板</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="frame">
+    <header>
+      <span class="eyebrow">CITIZEN SCIENCE</span>
+      <h1>うみパト</h1>
+      <p>市民参加型・シチズンサイエンス ゴミ拾い掲示板</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="top">トップ</button>
+      <button class="tab-btn" data-tab="timeline">タイムライン・投稿</button>
+    </nav>
+
+    <!-- ===================== トップページ ===================== -->
+    <section id="page-top" class="page active">
+
+      <div class="counter-card">
+        <p class="counter-label">みんなのプラスチック削減量</p>
+        <p class="counter-value"><span id="counter-number">0</span><span class="counter-unit">g</span></p>
+        <p class="counter-sub" id="counter-sub">まだ記録がありません</p>
+      </div>
+
+      <div class="ocean-scene" id="ocean-scene">
+        <div class="toast" id="toast">🐢 ありがとう!</div>
+
+        <svg class="turtle-svg" id="turtle-svg" data-mood="0" data-mood-group="sad" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+
+          <circle class="bubble b1" cx="36" cy="140" r="3"/>
+          <circle class="bubble b2" cx="80" cy="144" r="2.4"/>
+          <circle class="bubble b3" cx="228" cy="140" r="3.4"/>
+          <circle class="bubble b4" cx="266" cy="144" r="2.4"/>
+
+          <g class="decor sun">
+            <circle cx="262" cy="22" r="11" fill="#fff6c8" opacity="0.9"/>
+            <g stroke="#fff6c8" stroke-width="2" opacity="0.7">
+              <line x1="262" y1="4" x2="262" y2="10"/>
+              <line x1="280" y1="10" x2="275" y2="15"/>
+              <line x1="244" y1="10" x2="249" y2="15"/>
+            </g>
+          </g>
+
+          <g class="decor weed">
+            <path d="M18,150 C14,130 24,120 20,105" stroke="#2f8f5e" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M282,150 C286,132 276,122 281,108" stroke="#2f8f5e" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <g class="decor coral">
+            <path d="M46,150 Q43,134 50,130 Q55,135 52,150 Z" fill="#ff8a73"/>
+            <path d="M58,150 Q56,136 63,132 Q68,137 65,150 Z" fill="#ffab8f"/>
+            <path d="M244,150 Q241,135 248,131 Q253,136 250,150 Z" fill="#ff8a73"/>
+          </g>
+
+          <g class="decor fish1">
+            <ellipse cx="38" cy="88" rx="11" ry="6.5" fill="#ffd166"/>
+            <path d="M28,88 L18,82 L18,94 Z" fill="#ffd166"/>
+            <circle cx="43" cy="86.5" r="1.3" fill="#123241"/>
+          </g>
+          <g class="decor fish2">
+            <ellipse cx="256" cy="104" rx="10" ry="6" fill="#8be3c9"/>
+            <path d="M265,104 L275,99 L275,109 Z" fill="#8be3c9"/>
+            <circle cx="251" cy="102.5" r="1.2" fill="#123241"/>
+          </g>
+
+          <g class="decor sparkle">
+            <path d="M150,12 L151,17 L156,18 L151,19 L150,24 L149,19 L144,18 L149,17 Z" fill="#fff6c8"/>
+            <path d="M212,44 L213,47 L217,48 L213,49 L212,52 L211,49 L207,48 L211,47 Z" fill="#fff6c8"/>
+          </g>
+
+          <g class="trash-item t1">
+            <rect x="24" y="122" width="8" height="16" rx="2" fill="#9fb3a8"/>
+            <rect x="26" y="117" width="3.5" height="6" fill="#9fb3a8"/>
+          </g>
+          <g class="trash-item t2">
+            <path d="M60,136 Q57,127 65,125 Q75,127 72,136 Q66,141 60,136 Z" fill="#b7a98f"/>
+          </g>
+          <g class="trash-item t3">
+            <rect x="222" y="126" width="14" height="12" rx="2" fill="#a3a3a3"/>
+            <ellipse cx="229" cy="126" rx="7" ry="2.2" fill="#c2c2c2"/>
+          </g>
+          <g class="trash-item t4">
+            <line x1="252" y1="120" x2="262" y2="137" stroke="#e0d7a8" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <g class="trash-item t5">
+            <path d="M128,144 L148,139 L168,144 M132,147 L164,147" stroke="#9fb3a8" stroke-width="1.8" fill="none"/>
+          </g>
+
+          <g class="turtle-body">
+            <ellipse cx="118" cy="128" rx="10" ry="6" fill="#3f7a5c" transform="rotate(-15 118 128)"/>
+            <ellipse cx="182" cy="128" rx="10" ry="6" fill="#3f7a5c" transform="rotate(15 182 128)"/>
+            <ellipse cx="106" cy="80" rx="11" ry="6.5" fill="#3f7a5c" transform="rotate(-25 106 80)"/>
+            <ellipse cx="194" cy="80" rx="11" ry="6.5" fill="#3f7a5c" transform="rotate(25 194 80)"/>
+
+            <ellipse cx="150" cy="98" rx="64" ry="36" fill="#4c8a63" stroke="#3a6c4c" stroke-width="2.5"/>
+            <ellipse cx="150" cy="92" rx="50" ry="25" fill="#5c9c72" opacity="0.55"/>
+            <g fill="#3a6c4c" opacity="0.45">
+              <ellipse cx="128" cy="84" rx="9" ry="5.5"/>
+              <ellipse cx="150" cy="78" rx="9" ry="5.5"/>
+              <ellipse cx="172" cy="84" rx="9" ry="5.5"/>
+              <ellipse cx="138" cy="102" rx="9" ry="5.5"/>
+              <ellipse cx="162" cy="102" rx="9" ry="5.5"/>
+            </g>
+
+            <circle cx="150" cy="56" r="26" fill="#63b37c"/>
+
+            <g class="face">
+              <circle cx="137" cy="53" r="7" fill="#ffffff"/>
+              <circle cx="163" cy="53" r="7" fill="#ffffff"/>
+              <circle cx="138" cy="54.5" r="3.6" fill="#123241"/>
+              <circle cx="164" cy="54.5" r="3.6" fill="#123241"/>
+              <circle cx="139.3" cy="52.7" r="1.2" fill="#ffffff"/>
+              <circle cx="165.3" cy="52.7" r="1.2" fill="#ffffff"/>
+
+              <circle class="blush" cx="126" cy="62" r="4.5" fill="#ff9d8a"/>
+              <circle class="blush" cx="174" cy="62" r="4.5" fill="#ff9d8a"/>
+
+              <path class="eyebrow eyebrow-left" d="M128,42 L143,44.5" stroke="#2c5b3f" stroke-width="2.4" stroke-linecap="round"/>
+              <path class="eyebrow eyebrow-right" d="M172,42 L157,44.5" stroke="#2c5b3f" stroke-width="2.4" stroke-linecap="round"/>
+
+              <path class="mouth mood-0" d="M141,66 Q150,58 159,66" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path class="mouth mood-1" d="M141,66 Q150,61 159,66" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path class="mouth mood-2" d="M140,65.5 Q150,64 160,65.5" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path class="mouth mood-3" d="M140,65 Q150,65 160,65" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path class="mouth mood-4" d="M139,64 Q150,72 161,64" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path class="mouth mood-5" d="M138,63 Q150,76 162,63" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path class="mouth mood-6" d="M137,62 Q150,80 163,62" stroke="#123241" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            </g>
+          </g>
+
+          <circle class="burst-bubble d1" cx="122" cy="96" r="4" fill="#ffffff"/>
+          <circle class="burst-bubble d2" cx="150" cy="100" r="3.2" fill="#ffffff"/>
+          <circle class="burst-bubble d3" cx="178" cy="96" r="5" fill="#ffffff"/>
+          <circle class="burst-bubble d4" cx="164" cy="104" r="2.5" fill="#ffffff"/>
+        </svg>
+
+        <div class="scene-caption">
+          <p class="status" id="scene-status">ゴミだらけの海…カメさんも元気がない</p>
+          <p class="counter" id="scene-counter">記録件数 0 件</p>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><span id="stat-posts">0</span><label>件の記録</label></div>
+        <div class="stat"><span id="stat-people">0</span><label>人が参加</label></div>
+      </div>
+
+      <button class="cta-btn" id="cta-btn">行動を記録する →</button>
+    </section>
+
+    <!-- ===================== タイムライン・投稿ページ ===================== -->
+    <section id="page-timeline" class="page">
+
+      <section class="composer">
+        <h2>エコ行動を記録する</h2>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="name-input">お名前</label>
+            <input id="name-input" type="text" maxlength="20" placeholder="なまえ（未入力可）">
+          </div>
+          <div class="field">
+            <label for="action-select">行動の種類</label>
+            <select id="action-select"></select>
+          </div>
+        </div>
+
+        <div class="field" id="custom-grams-field" style="display:none;">
+          <label for="grams-input">拾った・減らした量（g）</label>
+          <input id="grams-input" type="number" min="0" step="1" placeholder="例：150">
+        </div>
+
+        <div class="field">
+          <label for="body-input">コメント</label>
+          <textarea id="body-input" maxlength="300" placeholder="いつ・どこで・どんな行動をしたか教えてください"></textarea>
+        </div>
+
+        <div class="field">
+          <label>写真（任意）</label>
+          <div class="photo-field">
+            <input type="file" id="photo-input" accept="image/*">
+            <div id="photo-preview-wrap"></div>
+          </div>
+        </div>
+
+        <div class="composer-footer">
+          <span class="char-count" id="char-count">0 / 300</span>
+          <button class="post-btn" id="post-btn" type="button">投稿する</button>
+        </div>
+        <div class="error-msg" id="error-msg"></div>
+      </section>
+
+      <p class="board-label">— タイムライン —</p>
+
+      <div id="timeline" class="timeline"></div>
+      <p id="empty-msg" class="empty">まだ記録がありません。最初の行動を記録してみましょう。</p>
+    </section>
+
+  </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

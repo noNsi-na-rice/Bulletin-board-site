@@ -1,0 +1,370 @@
+:root{
+  --sand: #f7ecd2;
+  --sand-edge: #e9d9ae;
+  --ink: #123241;
+  --ink-soft: #4c6b78;
+  --coral: #ff6f59;
+  --coral-dark: #d94f3d;
+  --deep: #072536;
+  --deep2: #0c3a52;
+  --grad-top: #5c5230;
+  --grad-bottom: #3a4a42;
+}
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--deep) 0%, var(--deep2) 55%, #0a2e40 100%);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  color: var(--ink);
+  padding: 28px 14px 70px;
+}
+
+.frame{
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  padding: 24px 20px 36px;
+  background: rgba(255,255,255,0.02);
+}
+
+header{ text-align: center; margin-bottom: 16px; }
+header .eyebrow{
+  display: inline-block;
+  background: var(--coral);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+header h1{
+  font-family: 'Kaisei Decol', serif;
+  font-size: clamp(26px, 5vw, 36px);
+  margin: 0 0 6px;
+  color: #eaf6fa;
+}
+header p{ margin: 0; color: #b9d7e0; font-size: 13px; }
+
+/* ===== タブ ===== */
+.tabs{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.tab-btn{
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #cfeaf0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.tab-btn.active{
+  background: var(--coral);
+  border-color: var(--coral);
+  color: #fff;
+}
+.tab-btn:hover {
+  opacity: 0.8;
+}
+
+.page{ display: none; }
+.page.active{ display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn{ from{ opacity: 0; } to{ opacity: 1; } }
+
+/* ===== トップページ：カウンター ===== */
+.counter-card{
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px 16px 16px;
+  margin-bottom: 20px;
+}
+.counter-label{
+  margin: 0 0 4px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: #9fd3de;
+}
+.counter-value{
+  margin: 0;
+  font-family: 'Kaisei Decol', serif;
+  font-size: clamp(38px, 9vw, 56px);
+  color: #fff;
+  line-height: 1.1;
+}
+.counter-unit{ font-size: 0.4em; margin-left: 4px; color: #9fd3de; }
+.counter-sub{ margin: 4px 0 0; font-size: 12px; color: #bfe6ec; }
+
+/* ===== 海のシーン（カメさん） ===== */
+.ocean-scene{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--grad-top), var(--grad-bottom));
+  transition: background 0.9s ease;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.35), 0 10px 24px rgba(0,0,0,0.35);
+  margin-bottom: 18px;
+}
+.turtle-svg{ display: block; width: 100%; height: auto; max-height: 230px; }
+.scene-caption{ text-align: center; padding: 6px 12px 12px; color: #eafcff; }
+.scene-caption .status{ font-weight: 700; font-size: 14px; margin: 0 0 2px; }
+.scene-caption .counter{ font-size: 11px; color: #bfe6ec; margin: 0; }
+
+.bubble{
+  fill: rgba(255,255,255,0.35);
+  transform-box: fill-box; transform-origin: center;
+  animation: rise 6s linear infinite;
+}
+.bubble.b2{ animation-duration: 7.5s; animation-delay: 1.2s; }
+.bubble.b3{ animation-duration: 5.2s; animation-delay: 2.4s; }
+.bubble.b4{ animation-duration: 8.5s; animation-delay: 0.6s; }
+@keyframes rise{
+  0%{ transform: translateY(0) scale(0.6); opacity: 0; }
+  10%{ opacity: 0.8; }
+  100%{ transform: translateY(-110px) scale(1); opacity: 0; }
+}
+
+.trash-item{ transition: opacity 0.9s ease, transform 0.9s ease; opacity: 1; transform: translateY(0) rotate(0deg); }
+.trash-item.gone{ opacity: 0; transform: translateY(20px) rotate(25deg); }
+
+.decor{ opacity: 0; transition: opacity 1s ease; transform-box: fill-box; transform-origin: center; }
+.decor.show{ opacity: 1; }
+.decor.fish1.show{ animation: swim 7s ease-in-out infinite; }
+.decor.fish2.show{ animation: swim2 8s ease-in-out infinite; }
+@keyframes swim{ 0%,100%{ transform: translateX(0); } 50%{ transform: translateX(14px); } }
+@keyframes swim2{ 0%,100%{ transform: translateX(0); } 50%{ transform: translateX(-12px); } }
+.decor.sparkle.show{ animation: twinkle 1.6s ease-in-out infinite; }
+@keyframes twinkle{ 0%,100%{ opacity: 0.4; } 50%{ opacity: 1; } }
+.decor.weed.show{ animation: sway 4s ease-in-out infinite; }
+@keyframes sway{ 0%,100%{ transform: rotate(-4deg); } 50%{ transform: rotate(4deg); } }
+
+.mouth{ display: none; }
+.turtle-svg[data-mood="0"] .mouth.mood-0{ display: block; }
+.turtle-svg[data-mood="1"] .mouth.mood-1{ display: block; }
+.turtle-svg[data-mood="2"] .mouth.mood-2{ display: block; }
+.turtle-svg[data-mood="3"] .mouth.mood-3{ display: block; }
+.turtle-svg[data-mood="4"] .mouth.mood-4{ display: block; }
+.turtle-svg[data-mood="5"] .mouth.mood-5{ display: block; }
+.turtle-svg[data-mood="6"] .mouth.mood-6{ display: block; }
+
+.eyebrow{ transform-box: fill-box; transform-origin: center; transition: transform 0.6s ease; }
+.turtle-svg[data-mood-group="sad"] .eyebrow-left{ transform: rotate(18deg) translate(0,-2px); }
+.turtle-svg[data-mood-group="sad"] .eyebrow-right{ transform: rotate(-18deg) translate(0,-2px); }
+.turtle-svg[data-mood-group="neutral"] .eyebrow-left{ transform: rotate(4deg); }
+.turtle-svg[data-mood-group="neutral"] .eyebrow-right{ transform: rotate(-4deg); }
+.turtle-svg[data-mood-group="happy"] .eyebrow-left{ transform: rotate(-10deg) translate(0,-1px); }
+.turtle-svg[data-mood-group="happy"] .eyebrow-right{ transform: rotate(10deg) translate(0,-1px); }
+
+.blush{ opacity: 0; transition: opacity 0.6s ease; }
+.turtle-svg[data-mood-group="happy"] .blush{ opacity: 0.65; }
+
+.ocean-scene.celebrate .turtle-body{ animation: bounce 0.8s ease; }
+@keyframes bounce{
+  0%{ transform: translateY(0) scale(1); }
+  30%{ transform: translateY(-10px) scale(1.05); }
+  55%{ transform: translateY(2px) scale(0.98); }
+  100%{ transform: translateY(0) scale(1); }
+}
+.turtle-body{ transform-box: fill-box; transform-origin: center; }
+
+.burst-bubble{ opacity: 0; }
+.ocean-scene.celebrate .burst-bubble{ animation: burst 1.1s ease-out forwards; }
+.ocean-scene.celebrate .burst-bubble.d2{ animation-delay: 0.08s; }
+.ocean-scene.celebrate .burst-bubble.d3{ animation-delay: 0.16s; }
+.ocean-scene.celebrate .burst-bubble.d4{ animation-delay: 0.24s; }
+@keyframes burst{
+  0%{ opacity: 0; transform: translateY(0) scale(0.4); }
+  20%{ opacity: 0.9; }
+  100%{ opacity: 0; transform: translateY(-70px) scale(1.1); }
+}
+
+.toast{
+  position: absolute; top: 14px; left: 50%;
+  transform: translate(-50%, -8px);
+  background: rgba(255,255,255,0.92);
+  color: var(--ink); font-weight: 700; font-size: 13px;
+  padding: 6px 16px; border-radius: 20px;
+  opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none; box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  white-space: nowrap;
+}
+.toast.show{ opacity: 1; transform: translate(-50%, 0); }
+
+/* ===== 統計・CTA ===== */
+.stat-row{ display: flex; gap: 12px; margin-bottom: 18px; }
+.stat{
+  flex: 1; text-align: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 12px 8px;
+}
+.stat span{ display: block; font-family: 'Kaisei Decol', serif; font-size: 24px; color: #fff; }
+.stat label{ font-size: 11px; color: #a9d3dc; }
+
+.cta-btn{
+  display: block; width: 100%;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700; font-size: 15px; color: #fff;
+  background: var(--coral); border: none;
+  padding: 14px; border-radius: 14px; cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+}
+.cta-btn:hover{ transform: translateY(-2px); }
+
+/* ===== 投稿フォーム ===== */
+.composer{
+  background: var(--sand);
+  border: 1px solid var(--sand-edge);
+  border-radius: 14px;
+  padding: 20px 20px 18px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+  margin-bottom: 30px;
+}
+.composer h2{
+  font-family: 'Kaisei Decol', serif; font-size: 19px;
+  margin: 0 0 14px; color: #17323d;
+}
+.field{ margin-bottom: 14px; }
+.field label{
+  display: block; font-size: 12px; color: var(--ink-soft);
+  margin-bottom: 4px; letter-spacing: 0.05em;
+}
+.field input[type="text"],
+.field input[type="number"],
+.field select,
+.field textarea{
+  width: 100%;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 15px; color: var(--ink);
+  background: #fffdf6; border: none;
+  border-bottom: 2px dashed #cbb98c;
+  padding: 8px 4px; resize: vertical; outline: none;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--coral); }
+.field textarea{ min-height: 78px; line-height: 1.6; }
+.field-row{ display: flex; gap: 12px; }
+.field-row .field{ flex: 1; }
+
+.photo-field{
+  border: 2px dashed #cbb98c; border-radius: 10px;
+  padding: 12px; text-align: center; position: relative;
+}
+.photo-field input[type="file"]{ font-size: 13px; }
+.photo-preview{ margin-top: 10px; position: relative; display: inline-block; }
+.photo-preview img{
+  max-width: 100%; max-height: 160px; border-radius: 8px; display: block;
+}
+.photo-remove{
+  margin-top: 6px; background: none; border: none; color: var(--coral-dark);
+  font-size: 12px; cursor: pointer; text-decoration: underline;
+}
+
+.composer-footer{ display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+.char-count{ font-size: 12px; color: var(--ink-soft); }
+.post-btn{
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700; font-size: 14px; color: #fff;
+  background: var(--coral); border: none;
+  padding: 10px 26px; border-radius: 20px; cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.post-btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+.error-msg{ font-size: 12px; color: var(--coral-dark); margin-top: 8px; min-height: 14px; }
+
+.board-label{
+  text-align: center; color: #cfeaf0; font-size: 13px;
+  letter-spacing: 0.2em; margin-bottom: 18px;
+}
+
+/* ===== タイムライン ===== */
+.timeline{
+  position: relative;
+  padding-left: 26px;
+}
+.timeline::before{
+  content: '';
+  position: absolute;
+  left: 7px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: rgba(255,255,255,0.25);
+}
+.entry{
+  position: relative;
+  margin-bottom: 18px;
+  animation: dropIn 0.35s ease-out;
+}
+.entry::before{
+  content: '';
+  position: absolute;
+  left: -23px; top: 8px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
+}
+@keyframes dropIn{ from{ opacity: 0; transform: translateY(-10px); } }
+
+.entry-card{
+  background: var(--sand);
+  border: 1px solid var(--sand-edge);
+  border-radius: 12px;
+  padding: 14px 16px 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.28);
+  position: relative;
+}
+.entry-card img{
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.entry-top{ display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.entry-badge{
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #eaf5ee; color: #2c6b4f;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px;
+}
+.entry-grams{
+  font-size: 11px; font-weight: 700; color: var(--coral-dark);
+  background: #ffe9e4; padding: 3px 10px; border-radius: 12px;
+}
+.entry-name{ font-weight: 700; font-size: 14px; color: #17323d; }
+.entry-time{ font-size: 11px; color: var(--ink-soft); margin-bottom: 8px; }
+.entry-comment{ font-size: 14px; line-height: 1.7; color: var(--ink); white-space: pre-wrap; word-break: break-word; }
+
+.entry .delete{
+  position: absolute; top: 8px; right: 8px;
+  background: none; border: none; color: var(--ink-soft);
+  font-size: 13px; cursor: pointer; opacity: 0.5;
+  transition: opacity 0.15s, color 0.15s;
+}
+.entry .delete:hover{ opacity: 1; color: var(--coral-dark); }
+
+.empty{
+  text-align: center; color: #cfeaf0; font-size: 14px;
+  padding: 36px 10px; border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .entry, .bubble, .decor.fish1.show, .decor.fish2.show, .decor.sparkle.show, .decor.weed.show{ animation: none; }
+  .ocean-scene.celebrate .turtle-body{ animation: none; }
+}
